@@ -9,7 +9,6 @@ from numpy . linalg import eig
 9
 10 print (’ Input no . of counts in diagonal basis ’)
 11 Nd = int ( input () )
-73
 12
 13 print (’ Input no . of counts in right - circular basis ’)
 14 Nr = int ( input () )
