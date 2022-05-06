@@ -1,2 +1,3 @@
 # Quantum-State-Tomography-Python-codes-for-Linear-Inversion-and-Maximum-Likelihood-Estimation-methods
 Quantum State Tomography is a method of experimental reconstruction of an unknown quantum state using projection measurement data. Here, I have provided python codes for two methods of reconstruction; Linear Inversion and Maximum Likelihood Estimation.
+The codes are written in python language. To use the codes, you will need projection measurement data of the unknown quantum state. Some prerequisite knowledge of Quantum State Tomography is required to understand the codes. Let me know if you have any doubts. Thank you.
