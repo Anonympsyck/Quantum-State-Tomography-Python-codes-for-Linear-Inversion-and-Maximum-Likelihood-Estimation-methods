@@ -1,0 +1,38 @@
+from numpy . linalg import eig
+2 import numpy as np
+3
+4 print (’ Input no . of counts in horizontal basis ’)
+5 Nh = int ( input () )
+6
+7 print (’ Input no . of counts in vertical basis ’)
+8 Nv = int ( input () )
+9
+10 print (’ Input no . of counts in diagonal basis ’)
+11 Nd = int ( input () )
+73
+12
+13 print (’ Input no . of counts in right - circular basis ’)
+14 Nr = int ( input () )
+15
+16 Nt = Nv + Nh
+17 Na = Nt - Nd
+18 Nl = Nt - Nr
+19
+20 Density = [[ Nh /Nt , complex (( Nd - Na ) /(2* Nt ) ,(Nr - Nl ) /( -2* Nt ))],
+21 [ complex (( Nd - Na ) /(2* Nt ) ,(Nr - Nl ) /(2* Nt )) ,Nv / Nt ]]
+22
+23 print (’ The Density Matrix is : ’, Density )
+24
+25 w ,v = eig ( Density )
+26 print (’ Eigenvalues are : ’,w)
+27
+28 Density_square = np . dot ( Density , Density )
+29 k = 0
+30 p = 0
+31 for i in range (2) :
+32
+33 k = k + Density_square [i ][ i]
+34 p = p + Density [i ][ i]
+35
+36 print (’ The trace of square density matrix is : ’,k ," The trace of density
+matrix is :",p)
