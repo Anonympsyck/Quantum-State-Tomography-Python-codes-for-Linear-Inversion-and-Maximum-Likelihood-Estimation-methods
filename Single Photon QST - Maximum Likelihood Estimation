@@ -1,0 +1,71 @@
+import numpy as np
+2 import math
+3 from numpy . linalg import eig
+4 from scipy . optimize import fmin_bfgs
+5
+6 def f1 (t):
+7 Ta = np . array ([[ t [0] ,0] ,[ t [1] + complex (0 ,1) *t [2] , t [3]]])
+8 T_dagger = Ta . conj () .T
+9 A = np . dot ( T_dagger , Ta )
+10 k = 0
+11 for i in range (2) :
+12 k = k + A[i ][ i]
+13
+14 Density_2 = (1/ k)*A
+15
+16 eig_value , eig_vec = eig ( Density_2 )
+17
+18 coincidence_counts = np . array ([4894 ,5102 ,9987 ,5323])
+19
+20 h = np . array ([[1] ,[0]])
+21 v = np . array ([[0] ,[1]])
+22 d = np . array ([[1/(2**(1/2) ) ] ,[1/(2**(1/2) ) ]])
+23 l = np . array ([[1/(2**(1/2) ) ] ,[ complex (0 ,1) *1/(2**(1/2) ) ]])
+24
+25 ket = [h ,v ,d ,l]
+26 Norm = coincidence_counts [0] + coincidence_counts [1]
+27
+28 def f2 (i):
+29 bra = ket [i ]. conj () .T
+30 p = np . dot ( bra , Density_2 )
+31 q = np . dot (p , ket [i ])
+32 y = q. real
+33
+34 return y
+35 Fun2 = 0
+36
+37 for i in range (4) :
+38
+39 Fun2 = Fun2 + (( Norm * f2 (i) - ( coincidence_counts [i ]) ) **2) /( Norm
+*2* f2 (i)) + 0.5* math . log ( Norm * f2 (i))
+40 return Fun2 . ravel ()
+41
+42 x1 = np . array ([0.1 ,0.1 ,0.1 ,0.1])
+43 xopt = fmin_bfgs (f1 , x1 )
+44 print ( xopt )
+45
+46 Ta = np . array ([[ xopt [0] ,0] ,[ xopt [1] + complex (0 ,1) * xopt [2] , xopt [3]]])
+47 T_dagger = Ta . conj () .T
+48
+49 A = np . dot ( T_dagger , Ta )
+50 k = 0
+51 for i in range (2) :
+52 k = k + A[i ][ i]
+53
+54 Density = (1/ k)*A
+55
+56 print ( Density )
+57
+58 w ,v = eig ( Density )
+59 print (’ Eigenvalues are : ’,w)
+60
+61 Density_square = np . dot ( Density , Density )
+62 k = 0
+63 p = 0
+64 for i in range (2) :
+65
+66 k = k + Density_square [i ][ i]
+67 p = p + Density [i ][ i]
+68
+69 print (’ The trace of square density matrix is : ’,k ," The trace of density
+matrix is :",p)
